@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple Form</title>
+        <link rel="stylesheet" type="text/css" media="all" href="web.css">
+    </head>
+    <body>
+        <div>
+            <h3>A Simple Form</h3>
+            <p>Nilo Jatico II</p>
+        </div>
+        <div>
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name">
+            <br>
+            <label for="date">Date of Birth</label>
+            <input type="date" name="date" id="date">
+            <br>
+            <p id="error"></p>
+            <br>
+            <button id="submit">Submit</button>
+        </div>
+        <br>
+        <div id="container">
+            <div id="list"></div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $(document).ready(function() {
+                // Should validate after user inputs.
+                let isValid = true;
+                $("#submit").click(function() {
+                    if($("#name").val() == "") {
+                        $("#error").html("The name is missing.");
+                        isValid = false;
+                    }
+                    else if($("#date").val() == "") {
+                        $("#error").html("The date is missing.");
+                        isValid = false;
+                    }
+                    else {
+                        $("#error").html("");
+                        isValid = true;
+                    }
+                    if(isValid) {
+                        let template = document.createElement("div");
+                        
+                        let name = document.createElement("div");
+                        name.appendChild(document.createTextNode($("#name").val()));
+
+                        let date = document.createElement("div");
+                        date.appendChild(document.createTextNode($("#date").val()));
+
+                        template.appendChild(name);
+                        template.appendChild(date);
+                        $("#list").append(template);
+
+                        $("#name").val("");
+                        $("#date").val("");
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
